@@ -1,2 +1,51 @@
 <?php
 
+/**
+ * Implements hook_filter_info().
+ */
+function filter_noexit_filter_info() {
+  $filters['filter_noexit_node_title'] = array(
+    'title' => t('Node Titles Text Filter'),
+    'description' => t('Custom Input Filter [Optional link content](Note Title) or just [Node Title].'),
+    'process callback' => '_filter_noexit_node_title_process',
+    'tips callback' => '_filter_noexit_node_title_tips',
+    'cache' => TRUE,
+  );
+
+  return $filters;
+}
+
+function _filter_noexit_node_title_process($text, $filter, $format) {
+  return preg_replace_callback("/\[(.+?)\](\((.+)\))?/", '_filter_noexit_node_title_relpace_callback', $text);
+}
+
+function _filter_noexit_node_title_tips($filter, $format, $long = FALSE) {
+  return t("[Optional link content](Note Title) or just [Node Title] to link node by it's title");
+}
+
+/**
+ * Callback for preg_replace_callback.
+ */
+function _filter_noexit_node_title_relpace_callback($matches) {
+  if (empty($matches[1])) {
+    return $matches[0];
+  }
+
+  $node_title = check_plain(isset($matches[3]) ? $matches[3] : $matches[1]);
+  $link_content = $matches[1];
+
+  // Seach node by title.
+  $nid = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('title', $node_title)
+      ->orderBy('nid')
+      ->range(0, 1)
+      ->execute()
+      ->fetchField();
+
+  if (!$nid) {
+    return $matches[0];
+  }
+
+  return l($link_content, "node/$nid");
+}
