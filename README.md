@@ -1,6 +1,6 @@
 ## Node Titles Text Filter
 
-Node Titles Text Filter is Drupal 7 module built for as an experiment after [Drupal Drunkup Moscow][1] to check module building estimations.
+Node Titles Text Filter is Drupal 7 module built as an experiment after [Drupal Drinkup Moscow][1] to check module building estimations.
 
 This module provides new Input Filter to process markdown-style markup
 
@@ -9,6 +9,9 @@ This module provides new Input Filter to process markdown-style markup
 
 Initial version is created by [@kalabro][2] for [no-exit.org][3] project.
 
+### Results
+
+38 min between first and second commits instead of estimated 30 min.
 
 
   [1]: http://drupalcafe.ru/
