@@ -1,0 +1,4 @@
+name = Node Titles Text Filter
+description = Custom Input Filter [Optional link content](Note Title).
+package = "Input filters"
+core = 7.x
