@@ -16,7 +16,7 @@ function filter_noexit_filter_info() {
 }
 
 function _filter_noexit_node_title_process($text, $filter, $format) {
-  return preg_replace_callback("/\[(.+?)\](\((.+)\))?/", '_filter_noexit_node_title_relpace_callback', $text);
+  return preg_replace_callback("/\[(.+?)\](\((.+?)\))?/", '_filter_noexit_node_title_relpace_callback', $text);
 }
 
 function _filter_noexit_node_title_tips($filter, $format, $long = FALSE) {
